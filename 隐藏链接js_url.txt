@@ -1,0 +1,13 @@
+https://desc.alicdn.com/i4/581/050/589052607836/TB1zFvZLr2pK1RjSZFs8quNlXla.desc%7Cvar%5Edesc%3Bsign%5E040d61c9e4da983858ad0f1cf861fae0%3Blang%5Egbk%3Bt%5E1554669700
+https://item.taobao.com/item.htm?spm=a230r.1.0.0.1126e18axjHPE4&id=589052607836&ns=1#detail
+
+https://item.taobao.com/item.htm?spm=a230r.1.0.0.1126e18axjHPE4&id=589052607836&ns=1
+https://desc.alicdn.com/i4/581/050/589052607836/TB1zFvZLr2pK1RjSZFs8quNlXla.desc%7Cvar%5Edesc%3Bsign%5E040d61c9e4da983858ad0f1cf861fae0%3Blang%5Egbk%3Bt%5E1554669700
+
+
+https://desc.alicdn.com/i5/590/040/590043352955/TB16EhhOxnaK1RjSZFB8qwW7Vla.desc%7Cvar%5Edesc%3Bsign%5E58c5f157f8a0edb34d8a9eded3d57326%3Blang%5Egbk%3Bt%5E1553776648
+https://item.taobao.com/item.htm?spm=a230r.1.0.0.69f4e18aLaGsrh&id=590043352955&ns=1#detail
+desc.alicdn.com
+
+匹配:
+r'(//desc.alicdn.com/.+)"'
