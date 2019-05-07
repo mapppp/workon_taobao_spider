@@ -7,18 +7,22 @@ import time
 class TaoSpider:
     def __init__(self):
         self.user_agent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36"
-        self.cookies = "miid=1251581815637967137; t=781bf38a2cb7c1017ea65e968391e523; cna=+YcwFThx9EYCAXs1vywHDGJn; tg=0; thw=cn; hng=CN%7Czh-CN%7CCNY%7C156; x=e%3D1%26p%3D*%26s%3D0%26c%3D0%26f%3D0%26g%3D0%26t%3D0%26__ll%3D-1%26_ato%3D0; UM_distinctid=169fac7a4d2135-08813818d9d75-39395704-12c000-169fac7a4d3194; swfstore=145103; cookie2=1578a4478b571e9eae7b1da9c0e2ae56; _tb_token_=5d1dee854465e; _uab_collina=155512050097305009061934; _m_h5_tk=f0f07c29543cd80a647911aed1465e51_1555217117907; _m_h5_tk_enc=b24e36d02e775e07cfa8643cce581e47; alitrackid=www.taobao.com; v=0; skt=0f520f451217c3bb; csg=13c81ff4; uc3=vt3=F8dByEiYDwC3UEivgM4%3D&id2=UoH7LXu2CGXQiA%3D%3D&nk2=DgVepHGh%2B3rAvw%3D%3D&lg2=W5iHLLyFOGW7aA%3D%3D; existShop=MTU1NTIyMDk2OA%3D%3D; tracknick=m543260832; lgc=m543260832; _cc_=VFC%2FuZ9ajQ%3D%3D; dnk=m543260832; enc=4pitEtpYVhFzXv2S4x8YqdqfY9LoyrsQev2moL5VT0fv9T0fVVkZjlhHzFLGJ0jRRRf%2FPQmawyr01fT0HwrWbA%3D%3D; lastalitrackid=login.taobao.com; mt=ci=18_1; whl=-1%260%260%261555223509874; JSESSIONID=143F561E7B90EF5696762C4B6F07682C; l=bBMXRMcmvnXlm03tBOCiquI8at7tMIRAguPRwN2Xi_5Il18s84_OlZrF4eJ6Vj5R_aYB4keiqTJ9-etkq; isg=BKOjkRDk-zi9d7cUZHGMQeoIMueNMDewYBtvi9UAioJ5FMM2XWn6KqFGDqS_tI_S; uc1=cookie14=UoTZ4Sf%2FlUG6dg%3D%3D&lng=zh_CN&cookie16=W5iHLLyFPlMGbLDwA%2BdvAGZqLg%3D%3D&existShop=false&cookie21=U%2BGCWk%2F7p4sj&tag=8&cookie15=W5iHLLyFOGW7aA%3D%3D&pas=0"
-        self.headers = {"User-Agent": self.user_agent, "Cookie": self.cookies}
+        self.cookies = "miid=1251581815637967137; t=781bf38a2cb7c1017ea65e968391e523; cna=+YcwFThx9EYCAXs1vywHDGJn; tg=0; thw=cn; hng=CN%7Czh-CN%7CCNY%7C156; x=e%3D1%26p%3D*%26s%3D0%26c%3D0%26f%3D0%26g%3D0%26t%3D0%26__ll%3D-1%26_ato%3D0; UM_distinctid=169fac7a4d2135-08813818d9d75-39395704-12c000-169fac7a4d3194; _uab_collina=155512050097305009061934; enc=2id%2FTiaJkaPFwNn%2FlqKD7AcwagUggjsbtgAYRvyr8WlxgaGOVZW26wPj6EQYzuOqDUrVi54jQTQJaV83yehs7g%3D%3D; _m_h5_tk=17028522c9133f21828e193e5bb56646_1556009434965; _m_h5_tk_enc=eed07f4681c75336e4e311b5d0e1dcd1; _cc_=VT5L2FSpdA%3D%3D; mt=ci=0_0; JSESSIONID=6CACC2CE298301F5172CAA5154058809; isg=BDQ0Yvo61KNdGUAB38QTXHFlBfJmpVidiwb4vs6Rpr8dOdaD9R_YhvSwuRFEwZBP; l=bBMXRMcmvnXlmJTdBOfNZuI8at7tfCAbzsPzw4_GfICPOQfpDEZlWZOJnaT9C3GVa6U283rLI0XzBXYTWy4e0"
+        self.referer = "https://s.taobao.com/search?q=%E8%80%B3%E9%92%89&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20190427&ie=utf8&filter=reserve_price%5B%2C25%5D&sort=sale-desc"
+        self.headers = {"User-Agent": self.user_agent, "Cookie": self.cookies, "referer": self.referer}
         self.page_num = 1
-        self.root_url = "https://s.taobao.com/search?spm=a230r.1.14.180.59161f5dWI3JfC&type=samestyle&app=i2i&rec_type=1&uniqpid=-1693057917&nid=589419870826"
+        self.root_url = "https://s.taobao.com/search?spm=a230r.1.14.173.5b075b02otZOrw&type=samestyle&app=i2i&rec_type=1&uniqpid=-1677250984&nid=585478082264"
         self.items = {}
         self.pass_id = []
         # self.rq = requests.request(headers=self.headers)
 
-    def __set_cookies():
+    def __req(self):
         pass
-        
-    def __set_user_agent():
+
+    def __set_cookies(self):
+        pass
+
+    def __set_user_agent(self):
         with open('user-agent.txt','r',encoding="utf-8")as fp:
             s = fp.read()
             uli = json.loads(s, strict=False)
@@ -26,6 +30,10 @@ class TaoSpider:
     def __test(self, t):
         with open("test.txt", "w", encoding="utf-8") as wf:
             wf.write(t)
+
+    def get_headers(self):
+        with open("headers.js", "r", encoding="utf-8") as rf:
+            self.headers = json.load(rf)
 
     def set_root_url(self):
         url = input("url:")
@@ -134,13 +142,14 @@ class TaoSpider:
         if len(self.items) == 0:
             return
         loc_time = time.strftime("%m-%d-%H-%M", time.localtime(time.time()))
-        with open("ww/ww%s.txt"%loc_time, "a") as wf:
+        with open("ww/ww%s.txt"%loc_time, "a", encoding="utf-8") as wf:
             for i in self.items:
                 wf.write(i+"\t"+self.items[i]+"\n")
 
 
 if __name__ == "__main__":
     spiderMan = TaoSpider()
+    spiderMan.get_headers()
     spiderMan.set_root_url()
     spiderMan.set_pass_id()
     spiderMan.set_page_num()
