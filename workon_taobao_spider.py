@@ -11,7 +11,7 @@ class TaoSpider:
         self.referer = "https://s.taobao.com/search?q=%E8%80%B3%E9%92%89&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20190427&ie=utf8&filter=reserve_price%5B%2C25%5D&sort=sale-desc"
         self.headers = {"User-Agent": self.user_agent, "Cookie": self.cookies, "referer": self.referer}
         self.page_num = 1
-        self.root_url = "https://s.taobao.com/search?spm=a230r.1.14.173.5b075b02otZOrw&type=samestyle&app=i2i&rec_type=1&uniqpid=-1677250984&nid=585478082264"
+        self.root_url = "https://s.taobao.com/search?spm=a230r.1.14.17.7f3933a3qvnGgH&type=samestyle&app=i2i&rec_type=1&uniqpid=-1272557146&nid=589190196973"
         self.items = {}
         self.pass_id = []
         # self.rq = requests.request(headers=self.headers)
@@ -85,14 +85,20 @@ class TaoSpider:
                     r = requests.get(p_url, headers=self.headers)
                     r.raise_for_status()
                     r.encoding = r.apparent_encoding
+                    self.__test(r.text)
                     if pat.search(r.text) is not None:
                         root_rec_items = pat.search(r.text).group(1)
                         txt = json.loads(root_rec_items)
                         ili = txt["mods"]["recitem"]["data"]["items"]
+                        # print(ili)
                         for item in ili:
                             item_url = "https:" + item["detail_url"]
                             ww = item["nick"]
-                            self.items[ww] = item_url
+                            print(1)
+                            print("ww", ww)
+                            shoplink = item["shopLink"]
+                            print("shopLink", shoplink)
+                            self.items[ww] = [item_url, shoplink]
                 except:
                     pass
                 print("items:", len(self.items), "page:%d"%(i+1))
@@ -105,23 +111,25 @@ class TaoSpider:
         for i in self.items:
             old_items[i] = self.items[i]
         for ww in old_items:
-            iurl = old_items[ww]
+            iurl = old_items[ww][0]
             try:
-                # 获取异步加载商品描述的url
+                # 请求商品url，获取异步url
                 r = requests.get(iurl, headers=self.headers)
                 r.raise_for_status()
                 r.encoding = r.apparent_encoding
                 # self.__test(r.text)
+                # 异步url正则表达式
                 match = re.search(r"'(//desc.alicdn.com/.*?)',", r.text)
                 # 天猫不要
                 if match is None:
                     self.items.pop(ww)
                 else:
                     desc_url = "https:" + match.group(1)
-                    # 获取隐藏链接id字段
+                    # 请求异步url，获取隐藏链接
                     r1 = requests.get(desc_url, headers=self.headers)
                     r1.raise_for_status()
                     r1.encoding = r.apparent_encoding
+                    # 隐藏链接正则表达式
                     match2 = re.search(r'href="(.*?id=(\d+).*?)"', r1.text)
                     # 没有隐藏链接的不要
                     if match2 is not None:
@@ -141,19 +149,22 @@ class TaoSpider:
     def data_output(self):
         if len(self.items) == 0:
             return
-        loc_time = time.strftime("%m-%d-%H-%M", time.localtime(time.time()))
-        with open("ww/ww%s.txt"%loc_time, "a", encoding="utf-8") as wf:
-            for i in self.items:
-                wf.write(i+"\t"+self.items[i]+"\n")
+        else:
+            loc_time = time.strftime("%m-%d-%H-%M", time.localtime(time.time()))
+            with open("ww/ww%s.txt"%loc_time, "a", encoding="utf-8") as wf:
+                for i in self.items:
+                    wf.write(i+"\t"+self.items[i][0]+"\t"+self.items[i][1]+"\n")
 
+    def craw(self):
+        self.get_headers()
+        self.set_root_url()
+        self.set_pass_id()
+        self.set_page_num()
+        self.get_rec_items()
+        self.get_pass()
+        self.data_output()
+        print("end_item:", len(self.items))
 
 if __name__ == "__main__":
     spiderMan = TaoSpider()
-    spiderMan.get_headers()
-    spiderMan.set_root_url()
-    spiderMan.set_pass_id()
-    spiderMan.set_page_num()
-    spiderMan.get_rec_items()
-    spiderMan.get_pass()
-    spiderMan.data_output()
-    print("end_item:", len(spiderMan.items))
+    spiderMan.craw()
