@@ -117,6 +117,7 @@ class TaoSpider:
 		print("当前查找店铺品牌分类："+pp)
 		n = 0
 		old_items = {}
+		total_num = len(self.items)
 		for i in self.items:
 			old_items[i] = self.items[i]
 		for ww in old_items:
@@ -138,13 +139,14 @@ class TaoSpider:
 					r = requests.get(shoplink, headers=self.headers)
 					r.raise_for_status()
 					r.encoding = r.apparent_encoding
-					print("验证店铺中。。。。。。"+str(n))
+					print("验证店铺中。。。。。。"+str(n)+"/"+str(total_num))
 					shop_id = re.search(r'"shopId":"(\d+)"', r.text).group(1)
 					shop_link = r"https://shop%s.taobao.com/search.htm?search=y"%shop_id
 					txt = self.__req(shop_link)
 					ajax_key = re.search(r'<input id="J_ShopAsynSearchURL" type="hidden" value="(.*?)"', txt).group(1)
 					top_url = r"https://shop%s.taobao.com"%shop_id
 					ajax_url = top_url + ajax_key
+					print(ajax_url)
 					# print(shop_id)
 					ajax_txt = self.__req(ajax_url)
 					resp_key = re.search(pp, ajax_txt)
@@ -217,7 +219,7 @@ class TaoSpider:
 		self.set_pass_id()
 		self.set_page_num()
 		self.get_rec_items()
-		self.shop_pass("回力")
+		self.shop_pass("feiyue/飞跃")
 		# self.get_pass()
 		self.data_output()
 		print("end_item:", len(self.items))
